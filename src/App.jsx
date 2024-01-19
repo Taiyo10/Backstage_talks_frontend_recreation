@@ -2,6 +2,8 @@ import react, { useEffect, useState, useRef } from 'react';
 
 function App() {
   
+  let colours = ["blue", "red", "green", "purple", "orange", "yellow"]; //Adding a colour creates a whole new section
+
   const [Y, setY] = useState(0);
   const cooldownRef = useRef(false);
 
@@ -12,11 +14,11 @@ function App() {
       
       setY((prevY) => {
         if (event.deltaY > 0) {
-          // Scrolling down
-          return prevY - 1;
+          if (prevY === 0) return prevY;
+          else return prevY - 1;
         } else {
-          // Scrolling up
-          return prevY + 1;
+          if (prevY === (colours.length - 1)) return prevY;
+          else return prevY + 1;
         }
       });
       cooldownRef.current = true;
@@ -34,14 +36,15 @@ function App() {
     }
   }, []);
 
-  let colours = ["blue", "red", "green", "purple"];
-  document.body.style.backgroundColor = colours[Y];
   return (
-    <div style={{backgroundColor: colours[Y]}} class='transition-colors duration-1000 h-screen'>
-      <div id="numba1" class='shadow-[0_35px_75px_-20px_rgba(0,0,0,0.50)] w-[30vw] h-[60vh] absolute top-[20vh] left-[35vw] transition duration-1000' style={{transform: `translate3d(6px, ${0 - Y * 1000}px, 35px)`, backgroundColor: colours[0]}}></div>
-      <div id="numba2" class='shadow-[0_35px_75px_-20px_rgba(0,0,0,0.50)] w-[30vw] h-[60vh] absolute top-[20vh] left-[35vw] transition duration-1000' style={{transform: `translate3d(6px, ${1000 - Y * 1000}px, 35px)`, backgroundColor: colours[1]}}></div>
-      <div id="numba3" class='shadow-[0_35px_75px_-20px_rgba(0,0,0,0.50)] w-[30vw] h-[60vh] absolute top-[20vh] left-[35vw] transition duration-1000' style={{transform: `translate3d(6px, ${2000 - Y * 1000}px, 35px)`, backgroundColor: colours[2]}}></div>
-      <div id="numba4" class='shadow-[0_35px_75px_-20px_rgba(0,0,0,0.50)] w-[30vw] h-[60vh] absolute top-[20vh] left-[35vw] transition duration-1000' style={{transform: `translate3d(6px, ${3000 - Y * 1000}px, 35px)`, backgroundColor: colours[3]}}></div>
+    <div style={{backgroundColor: colours[Y], color: colours[Y], textShadow: '1px 1px 2px rgba(0,0,0,0.5) '}} class='transition-colors duration-1000 h-screen font-black'>
+
+      {colours.map((colour, index) => (
+        <div>
+          <div key={index} class='shadow-[0_35px_75px_-20px_rgba(0,0,0,0.50)] w-[30vw] h-[60vh] absolute top-[20vh] left-[35vw] z-50 transition duration-1000' style={{transform: `translate3d(6px, ${(index * 1000) - Y * 1000}px, 35px)`, backgroundColor: colour}}></div>
+          <h1 class="transition duration-1000 text-[25vw] absolute left-1/2 top-1/2" style={{transform: `translate3d(-50%, ${(index * 1000) - Y * 1000}px, 0px)`}}>{colour.toUpperCase()}</h1>
+        </div>
+     ))}
     </div>
   );
 }
