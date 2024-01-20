@@ -1,1 +1,1 @@
-Original Website: https://backstagetalks.com
+Original idea from https://backstagetalks.com
