@@ -1,5 +1,7 @@
 Original idea from https://backstagetalks.com
 
+By swiping, you can discover the display of a variety of colours. You may also add desired ones through the browsers built in colour selecter to visualize and compare colours
+
 ## Demo
 
 
