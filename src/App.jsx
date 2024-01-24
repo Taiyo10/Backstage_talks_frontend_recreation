@@ -15,7 +15,7 @@ function App() {
       if (cooldownRef.current) return;
       
       setY((prevY) => {
-        if (event.deltaY > 0) {
+        if (event.deltaY < 0) {
           if (prevY === 0) return prevY;
           else return prevY - 1;
         } else {
@@ -52,7 +52,7 @@ function App() {
   }
 
   return (
-    <div style={{backgroundColor: Y === colours.length ? chosenColor : colours[Y], textShadow: '1px 1px 2px rgba(0,0,0,0.5) '}} class='transition-colors duration-1000 h-screen font-black'>
+    <div style={{backgroundColor: Y === colours.length ? chosenColor : colours[Y], textShadow: '10px 15px 15px rgba(0,0,0,0.2) '}} class='transition-colors duration-1000 h-screen font-black'>
 
       {colours.map((colour, index) => (
         <div>
